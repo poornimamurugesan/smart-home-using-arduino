@@ -1,0 +1,27 @@
+#define relay 4
+#define relay_off 0
+#define relay_on 1 
+char data=0;
+void setup() {
+ pinMode(relay, OUTPUT);
+ digitalWrite(relay,relay_off);
+ Serial.begin(9600);
+ Serial.print("turn on the bulb");
+}
+
+void loop() {
+  if(Serial.available()>0){
+    data=Serial.read();
+    Serial.print(data);
+    Serial.print("\n");
+    if(data=='1'){
+      digitalWrite(relay,relay_on);
+      Serial.println("bulb is now turned ON");
+    }
+    else if(data=='0'){
+      digitalWrite(relay,relay_off);
+      Serial.println("bulb is now turned OFF");
+    }
+  }
+
+}
